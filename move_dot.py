@@ -7,7 +7,7 @@ from pathlib import Path
 with contextlib.redirect_stdout(None):
     import pygame
 
-WINDOW_SIZE_MULTIPLE = 3
+WINDOW_SIZE_MULTIPLE = 4
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 FRAMERATE = 250  # Hz
@@ -19,12 +19,15 @@ NUM_CONTACTS = 5
 class ForceGame():
     def __init__(self):
         self.forcepad = morph.Morph()
-        icon = pygame.image.load('icon.png')
+        icon = pygame.image.load('assets/icon.png')
         pygame.display.set_icon(icon)
         (self.width, self.height) = (WINDOW_SIZE_MULTIPLE * self.forcepad.cols,
                                      WINDOW_SIZE_MULTIPLE * self.forcepad.rows)
-        self.calibrate()
+        # self.calibrate()
+        self.mean_force_rest = np.array([20, 20, 20, 20, 20])
+        self.mean_force_press = np.array([150, 150, 150, 150, 150])
         self.generate_mapping()
+        self.run_game()
 
     def calibrate(self):
         # we assume that you can produce any force within these
@@ -146,6 +149,7 @@ class ForceGame():
         pygame.display.flip()
         running = True
         force_delta = np.zeros((2))
+        circle_loc = np.array([self.width // 2, self.height // 2])
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -153,20 +157,22 @@ class ForceGame():
                     running = False
             self.screen.fill(WHITE)
             frames = self.forcepad.read_frames()
-            forces = []
+            forces = np.zeros(NUM_CONTACTS)
             for frame in frames:
-                if frame.n_contacts > 0:
-                    for c in frame.contacts:
-                        if c.state == sensel.CONTACT_START:
-                            sensel.setLEDBrightness(self.forcepad.handle, c.id,
-                                                    100)
-                        elif c.state == sensel.CONTACT_END:
-                            sensel.setLEDBrightness(self.forcepad.handle, c.id,
-                                                    0)
-                        forces.append(c.total_force)
-                        pygame.draw.circle(
-                            self.screen, BLUE,
-                            (int(2 * c.x_pos), int(2 * c.y_pos)), 10)
+                if frame.n_contacts == NUM_CONTACTS:
+                    for i in range(NUM_CONTACTS):
+                        c = frame.contacts[i]
+                        forces[i] = c.total_force
+                    force_delta = np.dot(self.A, forces.reshape(
+                        NUM_CONTACTS, 1))
+                    next_x = circle_loc[0] + int(force_delta[0])
+                    next_y = circle_loc[1] + int(force_delta[1])
+                    if next_x > 0 and next_x < self.width and next_y > 0 and next_y > self.height:
+                        circle_loc[0] = next_x
+                        circle_loc[1] = next_y
+                    pygame.draw.circle(self.screen, BLUE,
+                                       (circle_loc[0], circle_loc[1]), 10)
+                    print("circle ", circle_loc)
             pygame.display.flip()
 
 
