@@ -13,7 +13,7 @@ BLUE = (0, 0, 255)
 FRAMERATE = 250  # Hz
 CALIBRATION_LENGTH = 3  # seconds
 CALIBRATION_FRAMES = FRAMERATE * CALIBRATION_LENGTH
-NUM_CONTACTS = 5
+NUM_CONTACTS = 4
 
 
 class ForceGame():
@@ -107,7 +107,7 @@ class ForceGame():
         print(f"mean force rest = {self.mean_force_rest}")
         print(f"mean force press= {self.mean_force_press}")
 
-    def generate_mapping(self, random=True):
+    def generate_mapping(self):
         # "force" vectors
         up = np.array([[0], [1]])
         down = np.array([[0], [-1]])
@@ -116,14 +116,20 @@ class ForceGame():
         output_zeros = np.zeros((2, 1))
 
         input_zeros = np.zeros((NUM_CONTACTS, 1))
-        if random:
-            inputs = []
-            for i in range(4):
-                vec = []
-                for low, high in zip(self.mean_force_rest,
-                                     self.mean_force_press):
-                    vec.append(np.random.uniform(low, high))
-                inputs.append(np.array(vec))
+        # if random:
+        #     inputs = []
+        #     for i in range(4):
+        #         vec = []
+        #         for low, high in zip(self.mean_force_rest,
+        #                              self.mean_force_press):
+        #             vec.append(np.random.uniform(low, high))
+        #         inputs.append(np.array(vec))
+
+        inputs = []
+        for i in range(NUM_CONTACTS):
+            z = np.zeros((NUM_CONTACTS))
+            z[i] = 100
+            inputs.append(z)
 
         C = np.block([[up, output_zeros, output_zeros, output_zeros], [
             output_zeros, down, output_zeros, output_zeros
@@ -172,7 +178,7 @@ class ForceGame():
                         circle_loc[1] = next_y
                     pygame.draw.circle(self.screen, BLUE,
                                        (circle_loc[0], circle_loc[1]), 10)
-                    print("circle ", circle_loc)
+                    print(force_delta)
             pygame.display.flip()
 
 

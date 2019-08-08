@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="spencer wilson" />
+  <title>Virtual Motor Control</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Virtual Motor Control</h1>
+<p class="author">spencer wilson</p>
+</header>
+<h2 id="virtual-motor-control">Virtual Motor Control</h2>
+<p>Background / Prior Art</p>
+<p>Question / Problem / Confusion</p>
+<p>Hypothesis</p>
+<p>Experiments / Test / Necessary Data</p>
+<p>Model / Mechanism</p>
+<p>This began with the interest in BMIs, we did experiments about single spike learning, and now we’re going to zoom out a bit and look at human learning novel mappings in general.</p>
+<p>Goal: push the limit of human motor output.</p>
+<blockquote>
+<p>“A fixed mapping seems harder – how do you explore the parameters of the control space, how do you teach someone to learn the strategy? Is this even possible? It certainly seems possible. Motor unit recruitment studies suggest perhaps it’s possible, but to what degree is an important question for us to address.” (Ctrl-Labs slides, 2018)<span class="citation" data-cites="Basmajian1963"><sup>1</sup></span></p>
+</blockquote>
+<p>Wolpert: &gt; From laboratory learning to real-world learning. We now have a detailed understanding of the learning and control of a narrow range of tasks, including simple reaching tasks in which visuomotor and dynamics perturbations are applied. Although these tasks are amenable to analysis and modelling, they do not capture the full complexity of real-world motor control and it is not clear whether the learning models that are developed will generalize to tasks such as tying shoelaces or learning to skateboard. The study of sensorimotor control is fundamentally difficult because it deals with a dynamic, real-time control system that turns sensations and memory into action and vice versa. Given this complexity, it is understandable that the field has focused on a limited number of simplified tasks. However, expanding the range of tasks may help us deal with new challenges.</p>
+<p>The idea is to move past force field paradigms into the virtual world to really probe the limits of human learning</p>
+<p>Strategies for the admin meetings: (thanks to naureen) leverage the continuation aspect of the work they’re sending a band things went well i know where i’m going, building on a foundation bring slides!!!! - project goal - prior art - outline / plan - lingering questions (who is my advisor?) what is the specific question/experiment?</p>
+<p>Let’s build a demo where user spikes are mapped to “keys” and the user is given feedback and prompts to generate a particular spike train. They need to be supplied with reason to explore the space, a reason not to overactivate, and reasonable targets based on what we’re able to pick up from the electrodes.</p>
+<p>motivation this control problem is something primates in particular are most adept at we want to generate a systematic characterization of our ability to solve these control problems (most interestingly with the hands) from the least complex to the most complex (or high dimensional) tasks most importantly: what are the strategies for learning such tasks? do our models agree with such strategies? are we optimal?</p>
+<p>first steps - make a balance type game in Unity for the VR headset - experiment with this to test the limits of the tool, ideate about where it could go in parallel - understand the modeling tools we have at our disposal - understand what the limits of those models are</p>
+<p>tentative title: Learning and relearning in virtual motor control tasks”</p>
+<p>first stage Learn fixed mapping between some control outputs and some environmental parameters Second stage Perturbing that mapping appropriately based on the question of interest</p>
+<p>How does this become impactful? Say something about how the brain produces goal-oriented movement patterns Say something about how we learn novel movements l Say something about the limits of human learning, of human potential Contribute to theory in the form of models of motor learning and control Contribute to the production of motor learning in silico Crucially, not just solutions to modeled problems, but solutions “from scratch” to subtly difficult motor problems E.g. how does a learned problem deal with perturbations? Parameter changes?</p>
+<p>17/7/19 Andy Think muscle → output → (feedback), less about the game itself Literature on activating single muscles in the hand/forearm? Single digit control? Send todorov finger, remapping papers Are synergies learned or developed or both? Two questions Learning / unlearning of synergies? Mappings? Perturbations to learned mappings Goal Design a game that provides the right feedback to tease apart our hypothetical spinal and supraspinal controllers– make a claim that there are both synergies and not synergies– perhaps voluntary control overrides these synergies, and once they are learned (the modules are combined in a sequence or on a manifold) they form a new module / synergy. That is, synergies are neither learned nor set in development, they are two facets of the same system. They appear as a result of the brain’s solution to the redundant control problem at any given time. Design a task that recruits synergies, breaks synergies apart, and reforms synergies. Show that a controller that generates this behavior is a hierarchical one that leverages these modules for combination, recombination, consolidation to learn new motor skills and adapt skills to new inputs and environments.</p>
+<p>Hypotheses The balance between CM connections and spinal synergies drives the balance between task-relevant and task-irrelevant variability? Predicts that CM connections “fine-tune” movements on top of synergistic activations to drive lower variability…? Problem: how do we tell CM-driven movements from non-CM? What is the neurophysiology of CM vs non, and does this give us a clue for teasing them apart? The interaction between CM and spinal modules allows behavior to “seek out” variability in the environment in an “active sensing” manner. This would predict that synergistic movements control rehearsed behaviors, while CMs control a reduction in variability / surprise? How does this differ from the OFC result?</p>
+<p>18/7/19 People have used microstimulation with EMG to classify CM and non-CM cells– how effective is this? Are there any modeling/theoretical efforts devoted to how CM connections might contribute to Variability reduction in “task relevant” dimensions? Null-space adjustments / subspace Drive for learning? How would we know which cells drive which muscles/movements? Used to fractionate synergies? Force the fractionation of synergies / production of new synergies How are these transferred across tasks? If we believe the dynamics argument, what does this mean for learning?</p>
+<p>23/7/19 Athena</p>
+<p>-What is the goal -Wire up a bunch of EMG, build a motor map -What is the limitation of control? -See how this map changes with an “unnatural” task -How do you create EMG → feedback mappings in a principled manner? -Could spend a whole PhD assaying tasks, mappings to uncover what is “intuitive” and what isn’t</p>
+<p>Task Don’t overthink— otherwise we’ll get stuck in a local minimum Don’t read too much— this will lead to incremental tasks What makes a task engaging, fun, motivating? A small amount of frustration— difficulty proportional to ability Maintenance of learned behavior— not falling over when bumped Intuitive What do we want to learn? What are we asking? What are we measuring? How do you respond to perturbations in a learned task? How do you learn something new? Why are some things easy for humans and difficult for robots? Vice versa? When we include power efficiency? What is an “intuitive” or “natural” motor task? What makes motor learning fast? Slow?</p>
+<p>SnakePass is a great example of a weird task that is fun and requires learning https://www.youtube.com/watch?v=4NNPr2Ay4OM The use of configurable jointed spheres is unique From reddit: “looking back, some fun was from self-imposed challenge, as I tried to look how far I can push fast-n-loose playstyle and not coil tightly around every single thing”</p>
+<p>Perturbations Changes to physics Of manipulandum Of world Mapping Correlate / decorrelate</p>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-Basmajian1963">
+<p>1. Basmajian, J. V. Control and Training of Individual Motor Units. <em>Science</em> <strong>141,</strong> 440–441 (1963).</p>
+</div>
+</div>
+</body>
+</html>
