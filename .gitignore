@@ -1,3 +1,5 @@
 .DS_Store
-papers
+papers/
 __pycache__
+*.pdf
+notes/
