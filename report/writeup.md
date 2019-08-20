@@ -9,6 +9,14 @@ geometry:
 
 <!--
 
+What this needs:
+- A background about muscle synergies based on research. The debate is still out, but it makes sense that there are synergies from a computational perspective. We'll only know the origins of those from neurophysiological study. We can try to measure the impact of fractionation through lots of data and careful correlation study.
+-
+
+ -->
+
+<!--
+
 ## Abstract
 
 ## Question / Problem / Goal
@@ -58,7 +66,7 @@ By extending laboratory tasks to continuous, naturalistic motor problems that sp
 - The hand has 29 joints and 34 muscles, though the dimensionality of natural hand movements is closer to 8 based on PCA analysis [@TodorovDimensionality2005, @Ingram2009]. We expect there to be some biomechanical constraints on hand output dimensionality, though we hypothesize that it is higher than 8 and lower than 23, which gives us a relatively large task space to work with for generating mappings.
 - We expect to find a limit on this dimensionality which is less than the available number dimensions, whether in muscles, motor units, or muscle synergies. We can use our data to generate mechanistic interpretations of the sources of this dimensionality limit, whether is is due to habitual movement or neural constraints. We expect to see multiple timescales of learning underlying these processes.
 - Constraints on hand movements are force-dependent, and the Henneman Size Principle is most clearly seen in deliberate force ramps. There are some arguments against the principle as a rule [@Basmajian1963, @Scheiber2004], arguing that constraints on individuated movements may be habitual rather than developmental. This is a highly contentious debate in the muscle synergy literature, and it is unclear if this is a feature or a bug for the aims of this project.
-- One route to circumvent hand constraints is to simply generate a mapping based on anatomical knowledge and record the learning process. This will illuminate the possibilities for adaptation to a task outside of any functional synergies. However, this experiment would be even more illuminating if we first generated a map of synergies but recording users' interactions with various objects and tools. This has been done using "cybergloves" in the past, but not with EMG recording[@TodorovDimensionality2005,@Ingram2009].
+- One route to circumvent hand constraints is to simply generate a mapping based on anatomical knowledge and record the learning process. This will illuminate the possibilities for adaptation to a task outside of any functional synergies. However, this experiment would be even more illuminating if we generated a map of synergies by recording users' interactions with various objects and tools. This has been done using "cybergloves" in the past, but not with EMG recording[@TodorovDimensionality2005, Ingram2009].
 
 ### Electromyography
 

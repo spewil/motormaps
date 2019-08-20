@@ -20,11 +20,35 @@ def generate_random_matrix(shape, normed=True, max_condition_number=10):
     return A
 
 
+def generate_2d_rotation(degrees):
+    theta = np.radians(degrees)
+    c, s = np.cos(theta), np.sin(theta)
+    return np.array(((c, -s), (s, c)))
+
+
+def rotate(vec, degrees):
+    theta = np.radians(degrees)
+    c, s = np.cos(theta), np.sin(theta)
+    return np.dot(np.array(((c, -s), (s, c))), vec)
+
+
 def random_radial_vector(length):
     theta = np.random.uniform(0, 2 * np.pi)
     x = length * np.cos(theta)
     y = length * np.sin(theta)
-    return np.array([int(x), int(y)])
+    return np.array([[x], [y]])
+
+
+def roots_of_unity(num_roots, length=1):
+    """
+    return vectors evenly spaced [0,2pi]
+    """
+    vecs = []
+    for n in range(num_roots):
+        x = length * np.cos((n * 2 * np.pi) / num_roots)
+        y = length * np.sin((n * 2 * np.pi) / num_roots)
+        vecs.append(np.array([[x], [y]]))
+    return vecs
 
 
 if __name__ == "__main__":
@@ -32,7 +56,12 @@ if __name__ == "__main__":
     # for _ in range(4):
     #     vecs.append(generate_random_matrix((2, 1)))
     # assert np.vstack(vecs).shape == (8, 1)
-    for _ in range(100):
-        vecs.append(random_radial_vector(100))
-    plt.plot([x[0] + 500 for x in vecs], [x[1] + 100 for x in vecs], '.')
+
+    # for _ in range(100):
+    #     vecs.append(random_radial_vector(100))
+    # plt.plot([x[0] + 500 for x in vecs], [x[1] + 100 for x in vecs], '.')
+    # plt.show()
+
+    vecs = roots_of_unity(100, 100)
+    plt.plot([int(x[0]) for x in vecs], [int(x[1]) for x in vecs], '.')
     plt.show()
